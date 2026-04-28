@@ -1,11 +1,16 @@
 # react-hanzi-input
 
+
+
 [![npm version](https://img.shields.io/npm/v/react-hanzi-input?style=flat-square)](https://www.npmjs.com/package/react-hanzi-input)
 [![license](https://img.shields.io/npm/l/react-hanzi-input?style=flat-square)](LICENSE)
 
 Chinese handwriting input component for React — canvas pad, stroke capture, and candidate picker powered by Google IME.
 
 **[Live Demo](https://phucbm.github.io/react-hanzi-input)**
+
+<img width="1624" height="970" alt="web-demo" src="https://github.com/user-attachments/assets/122272f0-d4af-485e-98e9-5556d984f183" />
+
 
 ## Two ways to use
 
