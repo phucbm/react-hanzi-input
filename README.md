@@ -9,7 +9,7 @@ Chinese handwriting input component for React — canvas pad, stroke capture, an
 
 **[Live Demo](https://phucbm.github.io/react-hanzi-input)**
 
-<img width="1624" height="970" alt="web-demo" src="https://github.com/user-attachments/assets/122272f0-d4af-485e-98e9-5556d984f183" />
+<img width="1624" height="970" alt="web-demo" src="https://github.com/user-attachments/assets/a115d5b8-87ca-4687-be7b-8a171f96c4ff" />
 
 
 ## Two ways to use
