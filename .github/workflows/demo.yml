@@ -21,15 +21,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
       - name: Install root deps
-        run: npm install
+        run: pnpm install
       - name: Install demo deps
-        run: cd demo && npm install
+        run: cd demo && pnpm install
       - name: Build demo
-        run: cd demo && npm run build
+        run: cd demo && pnpm build
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:

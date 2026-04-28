@@ -10,7 +10,7 @@ Chinese handwriting input component for React — canvas pad, stroke capture, an
 ## Install
 
 ```sh
-npm install react-hanzi-input
+pnpm add react-hanzi-input
 ```
 
 ## Quick start
@@ -70,6 +70,10 @@ Call via your proxy URL (avoids CORS in browser).
 ### `createHandwritingRoute()`
 
 Returns a `{ POST }` handler compatible with Next.js App Router and any Web Fetch API handler.
+
+## Credits
+
+Inspired by [icelam/chinese-handwriting-recognition](https://github.com/icelam/chinese-handwriting-recognition).
 
 ## License
 
