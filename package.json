@@ -1,0 +1,38 @@
+{
+  "name": "react-hanzi-input",
+  "version": "0.1.0",
+  "description": "Chinese handwriting input component powered by Google IME — canvas pad, stroke capture, and candidate picker in one React component",
+  "keywords": ["chinese", "handwriting", "hanzi", "recognition", "ime", "input", "react", "canvas", "stroke"],
+  "author": "phucbm",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/phucbm/react-hanzi-input.git" },
+  "homepage": "https://phucbm.github.io/react-hanzi-input",
+  "bugs": { "url": "https://github.com/phucbm/react-hanzi-input/issues" },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": { "react": ">=17", "react-dom": ">=17" },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
