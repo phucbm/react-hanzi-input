@@ -22,9 +22,11 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch",
+    "dev": "pnpm -C demo dev",
+    "dev:lib": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "registry:build": "node scripts/build-registry.mjs"
   },
   "peerDependencies": { "react": ">=17", "react-dom": ">=17" },
   "devDependencies": {

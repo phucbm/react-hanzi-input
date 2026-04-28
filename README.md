@@ -7,15 +7,26 @@ Chinese handwriting input component for React — canvas pad, stroke capture, an
 
 **[Live Demo](https://phucbm.github.io/react-hanzi-input)**
 
-## Install
+## Two ways to use
+
+| | npm package | Registry (shadcn-style) |
+|---|---|---|
+| Install | `pnpm add react-hanzi-input` | `npx shadcn@latest add <url>` |
+| Editable | No — import only | **Yes** — files copied to your project |
+| Updates | `pnpm update` | Manual (you own the code) |
+| Best for | Quick integration | Deep customization |
+
+---
+
+## Option A — npm package
 
 ```sh
 pnpm add react-hanzi-input
 ```
 
-## Quick start
+### Quick start
 
-### 1. Add the API proxy route (Next.js App Router)
+#### 1. Add the API proxy route (Next.js App Router)
 
 ```ts
 // app/api/handwriting/route.ts
@@ -23,7 +34,7 @@ import { createHandwritingRoute } from 'react-hanzi-input'
 export const { POST } = createHandwritingRoute()
 ```
 
-### 2. Use the component
+#### 2. Use the component
 
 ```tsx
 import { HanziInput } from 'react-hanzi-input'
@@ -38,6 +49,56 @@ export default function Page() {
   )
 }
 ```
+
+---
+
+## Option B — Registry (copy to edit)
+
+Copy the source files directly into your project so you can freely customize every detail — styles, markup, behavior.
+
+### Full widget (`HanziInput` + `HanziPad` + recognize logic)
+
+```sh
+npx shadcn@latest add https://phucbm.github.io/react-hanzi-input/r/hanzi-input.json
+```
+
+Files land in `components/hanzi/`:
+
+```
+components/hanzi/
+  HanziInput.tsx   ← main component
+  HanziPad.tsx     ← canvas pad
+  recognize.ts     ← Google IME API util
+  types.ts         ← TypeScript types
+```
+
+### Canvas only (`HanziPad`)
+
+```sh
+npx shadcn@latest add https://phucbm.github.io/react-hanzi-input/r/hanzi-pad.json
+```
+
+Files land in `components/hanzi/`:
+
+```
+components/hanzi/
+  HanziPad.tsx
+  types.ts
+```
+
+### After copying
+
+You still need the API proxy route — add it once to your app:
+
+```ts
+// app/api/handwriting/route.ts
+import { createHandwritingRoute } from 'react-hanzi-input'
+export const { POST } = createHandwritingRoute()
+```
+
+Since `recognize.ts` is already in your project, you can call `recognizeDirect()` server-side and skip the npm package entirely.
+
+---
 
 ## API
 

@@ -32,6 +32,8 @@ jobs:
         run: pnpm install
       - name: Install demo deps
         run: cd demo && pnpm install
+      - name: Build registry
+        run: pnpm registry:build
       - name: Build demo
         run: cd demo && pnpm build
       - uses: actions/configure-pages@v4
