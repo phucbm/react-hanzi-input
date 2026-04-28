@@ -27,6 +27,9 @@ export interface HanziPadProps {
   strokeColor?: string
   lineWidth?: number
   background?: string
+  showGrid?: boolean
+  gridLines?: 1 | 2 | 3
+  gridColor?: string
   className?: string
   style?: React.CSSProperties
 }
@@ -47,5 +50,9 @@ export interface HanziInputProps {
   height?: number
   showUndo?: boolean
   showClear?: boolean
+  background?: string
+  showGrid?: boolean
+  gridLines?: 1 | 2 | 3
+  gridColor?: string
   className?: string
 }

@@ -1,8 +1,8 @@
-import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react'
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react'
 import type { HanziPadHandle, HanziPadProps, Point, Stroke } from './types'
 
 export const HanziPad = forwardRef<HanziPadHandle, HanziPadProps>(
-  function HanziPad({ onStrokesChange, width = 280, height = 280, strokeColor = '#1a1a1a', lineWidth = 3, background = '#ffffff', className, style }, ref) {
+  function HanziPad({ onStrokesChange, width = 280, height = 280, strokeColor = '#1a1a1a', lineWidth = 3, background = '#ffffff', showGrid = true, gridLines = 2, gridColor = '#d1d5db', className, style }, ref) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const strokesRef = useRef<Stroke[]>([])
     const currentRef = useRef<Point[] | null>(null)
@@ -10,10 +10,44 @@ export const HanziPad = forwardRef<HanziPadHandle, HanziPadProps>(
 
     const getCtx = () => canvasRef.current?.getContext('2d') ?? null
 
+    const drawGrid = useCallback((ctx: CanvasRenderingContext2D) => {
+      if (!showGrid) return
+      const fractions: Record<1 | 2 | 3, number[]> = {
+        1: [0.5],
+        2: [1 / 3, 2 / 3],
+        3: [0.25, 0.5, 0.75],
+      }
+      const splits = fractions[gridLines]
+      const drawLines = (fs: number[], alpha: number) => {
+        ctx.globalAlpha = alpha
+        ctx.beginPath()
+        for (const f of fs) {
+          ctx.moveTo(width * f, 0)
+          ctx.lineTo(width * f, height)
+          ctx.moveTo(0, height * f)
+          ctx.lineTo(width, height * f)
+        }
+        ctx.stroke()
+      }
+      ctx.save()
+      ctx.strokeStyle = gridColor
+      ctx.lineWidth = 1
+      ctx.setLineDash([4, 4])
+      if (gridLines === 3) {
+        drawLines([0.25, 0.75], 0.35)
+        drawLines([0.5], 1)
+      } else {
+        drawLines(splits, 1)
+      }
+      ctx.setLineDash([])
+      ctx.restore()
+    }, [width, height, showGrid, gridLines, gridColor])
+
     const redraw = useCallback(() => {
       const ctx = getCtx()
       if (!ctx) return
       ctx.clearRect(0, 0, width, height)
+      drawGrid(ctx)
       ctx.strokeStyle = strokeColor
       ctx.lineWidth = lineWidth
       ctx.lineCap = 'round'
@@ -25,7 +59,12 @@ export const HanziPad = forwardRef<HanziPadHandle, HanziPadProps>(
         for (let i = 1; i < stroke.length; i++) ctx.lineTo(stroke[i].x, stroke[i].y)
         ctx.stroke()
       }
-    }, [width, height, strokeColor, lineWidth])
+    }, [width, height, strokeColor, lineWidth, drawGrid])
+
+    useEffect(() => {
+      const ctx = getCtx()
+      if (ctx) drawGrid(ctx)
+    }, [drawGrid])
 
     const getPoint = (e: React.PointerEvent<HTMLCanvasElement>): Point => {
       const rect = canvasRef.current!.getBoundingClientRect()
@@ -73,7 +112,8 @@ export const HanziPad = forwardRef<HanziPadHandle, HanziPadProps>(
         strokesRef.current = []
         currentRef.current = null
         drawingRef.current = false
-        getCtx()?.clearRect(0, 0, width, height)
+        const ctx = getCtx()
+        if (ctx) { ctx.clearRect(0, 0, width, height); drawGrid(ctx) }
         onStrokesChange?.([])
       },
       undo: () => {

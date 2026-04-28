@@ -130,7 +130,7 @@ function App() {
         <div style={{ maxWidth: 900, margin: '0 auto', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
             <h1 style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.02em' }}>react-hanzi-input</h1>
-            <span style={{ fontSize: 13, color: 'var(--muted)' }}>v0.1.0</span>
+            <span style={{ fontSize: 13, color: 'var(--muted)' }}>v0.2.0</span>
           </div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginLeft: 'auto', flexWrap: 'wrap' }}>
             <a href="https://www.npmjs.com/package/react-hanzi-input" target="_blank" rel="noopener noreferrer">
@@ -174,6 +174,7 @@ function App() {
                 onStrokesChange={handleStrokesChange}
                 strokeColor="var(--fg)"
                 background="var(--surface)"
+                gridLines={3}
                 style={{ border: '1px solid var(--border)', borderRadius: 10, boxShadow: 'var(--shadow)' }}
               />
 

@@ -1,9 +1,23 @@
-import { useCallback, useRef, useState } from 'react'
-import { HanziPad } from './HanziPad'
-import { recognize } from './recognize'
-import type { Candidate, HanziInputProps, HanziPadHandle, Stroke } from './types'
+import {useCallback, useRef, useState} from 'react'
+import {HanziPad} from './HanziPad'
+import {recognize} from './recognize'
+import type {Candidate, HanziInputProps, HanziPadHandle, Stroke} from './types'
 
-export function HanziInput({ onSelect, proxyUrl, language = 'zh-CN', limit = 8, width = 280, height = 280, showUndo = true, showClear = true, className }: HanziInputProps) {
+export function HanziInput({
+                               onSelect,
+                               proxyUrl,
+                               language = 'zh-CN',
+                               limit = 8,
+                               width = 280,
+                               height = 280,
+                               showUndo = true,
+                               showClear = true,
+                               background,
+                               showGrid = true,
+                               gridLines,
+                               gridColor,
+                               className
+                           }: HanziInputProps) {
   const padRef = useRef<HanziPadHandle>(null)
   const [candidates, setCandidates] = useState<Candidate[]>([])
   const [loading, setLoading] = useState(false)
@@ -48,7 +62,9 @@ export function HanziInput({ onSelect, proxyUrl, language = 'zh-CN', limit = 8, 
 
   return (
     <div className={className} style={{ display: 'inline-flex', flexDirection: 'column', gap: 8 }}>
-      <HanziPad ref={padRef} width={width} height={height} onStrokesChange={handleStrokesChange} style={{ border: '1px solid #d1d5db', borderRadius: 8 }} />
+        <HanziPad ref={padRef} width={width} height={height} onStrokesChange={handleStrokesChange}
+                  background={background} showGrid={showGrid} gridLines={gridLines} gridColor={gridColor}
+                  style={{border: '1px solid #d1d5db', borderRadius: 8}}/>
       <div style={{ display: 'flex', gap: 6 }}>
         {showUndo && <button type="button" onClick={handleUndo} disabled={strokeCount === 0} style={btn}>Undo</button>}
         {showClear && <button type="button" onClick={handleClear} disabled={strokeCount === 0} style={btn}>Clear</button>}

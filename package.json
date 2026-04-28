@@ -1,6 +1,6 @@
 {
   "name": "react-hanzi-input",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Chinese handwriting input component powered by Google IME — canvas pad, stroke capture, and candidate picker in one React component",
   "keywords": ["chinese", "handwriting", "hanzi", "recognition", "ime", "input", "react", "canvas", "stroke"],
   "author": "phucbm",
